@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <!-- Search Card -->
+  <div class="card">
+    <form method="get" action="/songs" class="row">
+      <div style="flex: 1 1 320px;">
+        <label for="q">Search by title</label>
+        <input id="q" name="q" value="{{ q }}" placeholder="e.g. Never Known Quit"/>
+      </div>
+      <div style="align-self:flex-end;">
+        <button type="submit">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dashboard Card -->
+  <div class="card">
+    <h2 style="margin-top:0;">Dashboard</h2>
+
+    <div class="row">
+      <div class="card" style="flex:1 1 180px; margin:0;">
+        <div class="muted">Total Songs</div>
+        <div style="font-size:28px; font-weight:700;">{{ total }}</div>
+      </div>
+
+      <div class="card" style="flex:1 1 180px; margin:0;">
+        <div class="muted">Draft</div>
+        <div style="font-size:28px; font-weight:700;">{{ draft }}</div>
+      </div>
+
+      <div class="card" style="flex:1 1 180px; margin:0;">
+        <div class="muted">Registered</div>
+        <div style="font-size:28px; font-weight:700;">{{ registered }}</div>
+      </div>
+
+      <div class="card" style="flex:1 1 180px; margin:0;">
+        <div class="muted">Released</div>
+        <div style="font-size:28px; font-weight:700;">{{ released }}</div>
+      </div>
+    </div>
+
+    <p class="muted" style="margin-top:12px; margin-bottom:0;">
+      Showing {% if q %}results for “{{ q }}”{% else %}all songs{% endif %}.
+    </p>
+  </div>
+
+  <!-- Songs Table Card -->
+  <div class="card">
+    <h2 style="margin-top:0;">Songs</h2>
+    {% if songs %}
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Writers</th>
+            <th>Album</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for s in songs %}
+            <tr>
+              <td>{{ s.title }}</td>
+              <td>{{ s.writers or "" }}</td>
+              <td>{{ s.album or "" }}</td>
+              <td>{{ s.status }}</td>
+              <td class="muted">{{ s.created_at.strftime("%Y-%m-%d") }}</td>
+              <td><a href="/songs/{{ s.id }}/edit">Edit</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="muted">No songs yet. Add your first one.</p>
+    {% endif %}
+  </div>
+
+{% endblock %}

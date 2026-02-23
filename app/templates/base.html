@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ title or "SongVault" }}</title>
+  <style>
+    body { font-family: system-ui, Arial; margin: 24px; max-width: 980px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    nav a { margin-right: 12px; }
+    .card { border: 1px solid #ddd; border-radius: 10px; padding: 14px; margin: 14px 0; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; }
+    input, select, textarea { padding: 10px; border-radius: 8px; border:1px solid #ccc; width: 100%; }
+    label { display:block; margin: 10px 0 6px; font-weight: 600; }
+    button { padding: 10px 14px; border-radius: 10px; border: 1px solid #333; background: #fff; cursor:pointer; }
+    .flash { padding:10px; border-radius:10px; margin: 12px 0; }
+    .success { border: 1px solid #7cc47c; }
+    .error { border: 1px solid #d77474; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { text-align:left; padding: 10px; border-bottom: 1px solid #eee; }
+    .muted { color:#666; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1 style="margin:0;">SongVault</h1>
+      <div class="muted">Catalogue • Releases • Registrations • YouTube</div>
+    </div>
+    <nav>
+      <a href="/songs">Songs</a>
+      <a href="/songs/new">Add Song</a>
+    </nav>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash {{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</body>
+</html>

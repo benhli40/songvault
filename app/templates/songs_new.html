@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+  <div class="card">
+    <h2 style="margin-top:0;">Add Song</h2>
+    <form method="post">
+      <label for="title">Title *</label>
+      <input id="title" name="title" placeholder="Song title"/>
+
+      <label for="writers">Writers</label>
+      <input id="writers" name="writers" placeholder="Benjamin Liles"/>
+
+      <label for="album">Album / Playlist</label>
+      <input id="album" name="album" placeholder="This Ordinary Kinda Life"/>
+
+      <label for="status">Status</label>
+      <select id="status" name="status">
+        <option>Draft</option>
+        <option>Registered</option>
+        <option>Released</option>
+      </select>
+
+      <label for="notes">Notes</label>
+      <textarea id="notes" name="notes" rows="4" placeholder="Any notes..."></textarea>
+
+      <div style="margin-top: 12px;">
+        <button type="submit">Save</button>
+      </div>
+    </form>
+  </div>
+{% endblock %}
